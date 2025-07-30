@@ -4,6 +4,7 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/Axel-Service/', // 👈 très important pour GitHub Pages !
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
