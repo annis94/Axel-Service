@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
 import { smoothScrollTo } from '@/utils/mobileOptimization';
 
 const FloatingCTA = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const { scrollY } = useScroll();
+  // Effet de parallaxe inversé - les boutons montent quand on scrolle
+  const y = useTransform(scrollY, [0, 500], [0, -300]);
+  const rotate = useTransform(scrollY, [0, 500], [0, 10]);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
       setShowScrollTop(currentScrollY > 500);
-      
-      // Debug
-      console.log('Scroll Y:', currentScrollY, 'Transform:', Math.max(0, -currentScrollY * 0.3));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -34,12 +33,9 @@ const FloatingCTA = () => {
   };
 
   return (
-    <div 
-      className="fixed bottom-6 right-6 z-[9999] space-y-4 transition-transform duration-300" 
-      style={{ 
-        transform: `translateY(${Math.max(-100, -scrollY * 0.5)}px)`,
-        transition: 'transform 0.3s ease-out'
-      }}
+    <motion.div 
+      className="fixed bottom-6 right-6 z-[9999] space-y-4" 
+      style={{ y, rotate }}
     >
       
       {/* Bouton WhatsApp */}
@@ -88,7 +84,7 @@ const FloatingCTA = () => {
           </motion.button>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
