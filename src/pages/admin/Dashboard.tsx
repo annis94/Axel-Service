@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Users,
   Briefcase,
@@ -193,7 +194,7 @@ const AdminDashboard: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-gray-800">Recent Activity</h2>
-          <button className="text-blue-600 hover:text-blue-800">View All</button>
+          <Link to="/admin/users" className="text-blue-600 hover:text-blue-800">View All</Link>
         </div>
 
         <div className="space-y-4">

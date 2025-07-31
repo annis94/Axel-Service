@@ -279,9 +279,11 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.5 }}
                   >
-                    <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all duration-300 border-0">
-                      Nous contacter
-                    </Button>
+                    <Link to="/contact" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all duration-300 border-0">
+                        Nous contacter
+                      </Button>
+                    </Link>
                   </motion.div>
                 </div>
               </nav>

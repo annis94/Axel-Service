@@ -105,7 +105,11 @@ export default function Contact() {
                 <PhoneIcon className="w-12 h-12 text-cyan-600 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Par téléphone</h3>
                 <p className="text-gray-600 mb-4">Appelez-nous directement pour une réservation</p>
-                <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
+                <Button 
+                  size="lg" 
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white"
+                  onClick={() => window.location.href = 'tel:0660202612'}
+                >
                   <PhoneIcon className="w-5 h-5 mr-2" />
                   Appeler maintenant
                 </Button>
@@ -114,7 +118,11 @@ export default function Contact() {
                 <MessageCircleIcon className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Par WhatsApp</h3>
                 <p className="text-gray-600 mb-4">Envoyez-nous un message pour une réservation</p>
-                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+                <Button 
+                  size="lg" 
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
+                  onClick={() => window.open('https://wa.me/33660202612?text=Bonjour, je souhaite réserver vos services', '_blank')}
+                >
                   <MessageCircleIcon className="w-5 h-5 mr-2" />
                   WhatsApp
                 </Button>

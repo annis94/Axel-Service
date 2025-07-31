@@ -9,8 +9,13 @@ const FloatingCTA = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 300);
-      setShowScrollTop(window.scrollY > 500);
+      const scrollY = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const isAtBottom = scrollY + windowHeight >= documentHeight - 100; // 100px de marge
+      
+      setIsVisible(scrollY > 300 && !isAtBottom);
+      setShowScrollTop(scrollY > 500);
     };
 
     window.addEventListener('scroll', handleScroll);
