@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { CheckCircle, Phone, Shield, Users, CalendarCheck, ArrowRight, Star, Zap, Target, Award, Clock, Sparkles, Building2, Home as HomeIcon, Sparkle, ChevronRight, Play } from "lucide-react";
+import { useHomeScroll } from "@/hooks/useHomeScroll";
 
 const accent = "text-cyan-400";
 
@@ -77,6 +78,9 @@ const advantages = [
 ];
 
 export default function Home() {
+  // Utiliser le hook pour optimiser le scroll sur mobile
+  useHomeScroll();
+  
   const { scrollY } = useScroll();
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
@@ -86,12 +90,15 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
-  const heroY = useTransform(scrollY, [0, 500], [0, -100]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
-  const servicesY = useTransform(scrollY, [200, 600], [100, 0]);
-  const statsY = useTransform(scrollY, [400, 800], [100, 0]);
-  const advantagesY = useTransform(scrollY, [600, 1000], [100, 0]);
-  const aboutY = useTransform(scrollY, [800, 1200], [100, 0]);
+  // Réduire les animations sur mobile pour améliorer le scroll
+  const isMobile = window.innerWidth <= 768;
+  
+  const heroY = useTransform(scrollY, [0, 500], [0, isMobile ? -50 : -100]);
+  const heroOpacity = useTransform(scrollY, [0, 300], [1, isMobile ? 0.8 : 0.3]);
+  const servicesY = useTransform(scrollY, [200, 600], [isMobile ? 50 : 100, 0]);
+  const statsY = useTransform(scrollY, [400, 800], [isMobile ? 50 : 100, 0]);
+  const advantagesY = useTransform(scrollY, [600, 1000], [isMobile ? 50 : 100, 0]);
+  const aboutY = useTransform(scrollY, [800, 1200], [isMobile ? 50 : 100, 0]);
 
   const isHeroInView = useInView(heroRef, { once: true, margin: "-100px" });
   const isServicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
@@ -106,6 +113,9 @@ export default function Home() {
   const mouseYSpring = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Désactiver les animations de souris sur mobile pour éviter les conflits de scroll
+    if (window.innerWidth <= 768) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
@@ -120,20 +130,29 @@ export default function Home() {
   }, [mouseX, mouseY]);
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-cyan-50 min-h-screen w-full overflow-x-hidden">
+    <div className="bg-gradient-to-br from-slate-50 via-white to-cyan-50 min-h-screen w-full overflow-x-hidden scroll-smooth-mobile">
       {/* Hero Section - Optimisé */}
       <motion.section 
         ref={heroRef}
         style={{ y: heroY, opacity: heroOpacity }}
-        className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-8"
+        className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-8 motion-section"
         onMouseMove={(e) => {
+          // Désactiver les animations de souris sur mobile
+          if (window.innerWidth <= 768) return;
+          
           const rect = e.currentTarget.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width;
           const y = (e.clientY - rect.top) / rect.height;
           setMousePosition({ x, y });
         }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
+        onMouseEnter={() => {
+          if (window.innerWidth <= 768) return;
+          setIsHovering(true);
+        }}
+        onMouseLeave={() => {
+          if (window.innerWidth <= 768) return;
+          setIsHovering(false);
+        }}
       >
         {/* Background Patterns Sophistiqués */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/30 via-transparent to-blue-50/30" />
@@ -242,7 +261,7 @@ export default function Home() {
       <motion.section 
         ref={statsRef}
         style={{ y: statsY }}
-        className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
+        className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 motion-section"
       >
         <motion.div 
           initial={{ opacity: 0 }}
@@ -274,7 +293,7 @@ export default function Home() {
       <motion.section 
         ref={servicesRef}
         style={{ y: servicesY }}
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 motion-section"
       >
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -392,7 +411,7 @@ export default function Home() {
       <motion.section 
         ref={advantagesRef}
         style={{ y: advantagesY }}
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20"
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 motion-section"
       >
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -450,7 +469,7 @@ export default function Home() {
       <motion.section 
         ref={aboutRef}
         style={{ y: aboutY }}
-        className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12"
+        className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 motion-section"
       >
         <motion.div
           initial={{ y: 50, opacity: 0 }}
