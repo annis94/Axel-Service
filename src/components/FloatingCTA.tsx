@@ -11,14 +11,17 @@ const FloatingCTA = () => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       
-      // Afficher les boutons après 200px de scroll (plus tôt)
-      const shouldBeVisible = scrollY > 200;
+      // Afficher les boutons après 100px de scroll (très tôt)
+      const shouldBeVisible = scrollY > 100;
       setIsVisible(shouldBeVisible);
       setShowScrollTop(scrollY > 500);
       
       // Debug
       console.log('Scroll Y:', scrollY, 'Visible:', shouldBeVisible);
     };
+
+    // Vérifier la position initiale
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -38,8 +41,8 @@ const FloatingCTA = () => {
 
   return (
     <AnimatePresence>
-      {/* Version de test - toujours visible */}
-      <div className="fixed bottom-6 right-6 z-50 space-y-4" style={{ zIndex: 9999 }}>
+      {isVisible && (
+        <div className="fixed bottom-6 right-6 z-50 space-y-4" style={{ zIndex: 9999 }}>
           
           {/* Bouton WhatsApp */}
           <motion.button
@@ -90,6 +93,7 @@ const FloatingCTA = () => {
             )}
           </AnimatePresence>
         </div>
+      )}
     </AnimatePresence>
   );
 };
