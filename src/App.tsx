@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import { optimizeForMobile } from './utils/mobileOptimization';
 
 // Layouts
 import MainLayout from './layouts/MainLayout';
@@ -20,6 +21,11 @@ import NotFound from './pages/NotFound';
 import './styles/App.css';
 
 function App() {
+  // Initialiser l'optimisation mobile au chargement de l'app
+  useEffect(() => {
+    optimizeForMobile();
+  }, []);
+
   return (
     <Router>
       <AuthProvider>

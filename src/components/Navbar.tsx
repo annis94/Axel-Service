@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Phone, Menu, X, ChevronDown, Shield, Sparkles } from 'lucide-react';
+import { disableScrollOnMenuOpen } from '@/utils/mobileOptimization';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,15 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Gérer le scroll du body quand le menu mobile est ouvert
+  useEffect(() => {
+    disableScrollOnMenuOpen(isOpen);
+    
+    return () => {
+      disableScrollOnMenuOpen(false);
+    };
+  }, [isOpen]);
 
   const navigation = [
     { name: 'Accueil', href: '/', active: location.pathname === '/' },

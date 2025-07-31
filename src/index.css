@@ -91,6 +91,45 @@
     font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    /* Amélioration du scroll sur mobile */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+  }
+  
+  /* Correction du scroll sur mobile */
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+  }
+  
+  /* Empêcher le scroll sur le body quand le menu mobile est ouvert */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Amélioration du scroll pour les éléments fixes */
+  .fixed {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* Optimisation pour les animations sur mobile */
+  @media (max-width: 768px) {
+    .fixed {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    
+    /* Réduire les animations sur mobile pour améliorer les performances */
+    * {
+      -webkit-animation-duration: 0.2s !important;
+      animation-duration: 0.2s !important;
+    }
   }
 }
 
@@ -119,13 +158,19 @@
   @apply bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 transition-all duration-300;
 }
 
-
-
-@layer base {
-  * {
-    @apply border-border;
+/* Correction spécifique pour le scroll mobile */
+@layer utilities {
+  .scroll-smooth-mobile {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
-  body {
-    @apply bg-background text-foreground;
+  
+  .no-scroll {
+    overflow: hidden;
+  }
+  
+  .mobile-scroll-fix {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }

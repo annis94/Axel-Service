@@ -57,6 +57,10 @@ npm run build
 
 # Déployer sur GitHub Pages
 npm run deploy
+
+# Ou utiliser le script de déploiement automatisé
+chmod +x deploy.sh
+./deploy.sh
 ```
 
 ## 📞 Contact
@@ -68,6 +72,31 @@ npm run deploy
 ## 🎯 Mission
 
 Offrir des solutions radicales, durables et adaptées à chaque situation, pour restaurer la tranquillité de nos clients. Nous nous engageons à fournir un service professionnel de qualité, disponible 24/7.
+
+## 🚀 Déploiement sur GitHub Pages
+
+### Configuration requise
+
+1. **Repository GitHub :** Assurez-vous que votre repository s'appelle `Axel-Service`
+2. **Branche de déploiement :** GitHub Pages doit être configuré pour utiliser la branche `gh-pages`
+3. **Actions GitHub :** Le déploiement se fait automatiquement via gh-pages
+
+### Étapes de déploiement
+
+```bash
+# Méthode 1 : Utiliser npm
+npm run deploy
+
+# Méthode 2 : Script automatisé (recommandé)
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Résolution des problèmes courants
+
+- **Erreur 404 sur main.tsx :** Vérifiez que `base: '/Axel-Service/'` est configuré dans `vite.config.ts`
+- **Routes ne fonctionnent pas :** L'application utilise HashRouter pour la compatibilité GitHub Pages
+- **Assets non trouvés :** Vérifiez que le fichier `.nojekyll` est présent dans le dossier `dist`
 
 ## 📄 Licence
 

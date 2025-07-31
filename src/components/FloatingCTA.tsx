@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageCircle, X, ArrowUp } from 'lucide-react';
+import { smoothScrollTo } from '@/utils/mobileOptimization';
 
 const FloatingCTA = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +18,7 @@ const FloatingCTA = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    smoothScrollTo(0, 500);
   };
 
   const handleCall = () => {
