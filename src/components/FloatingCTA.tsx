@@ -12,6 +12,9 @@ const FloatingCTA = () => {
       const currentScrollY = window.scrollY;
       setScrollY(currentScrollY);
       setShowScrollTop(currentScrollY > 500);
+      
+      // Debug
+      console.log('Scroll Y:', currentScrollY, 'Transform:', Math.max(0, -currentScrollY * 0.3));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -34,7 +37,7 @@ const FloatingCTA = () => {
     <div 
       className="fixed bottom-6 right-6 z-[9999] space-y-4 transition-transform duration-300" 
       style={{ 
-        transform: `translateY(${Math.max(0, -scrollY * 0.1)}px)`,
+        transform: `translateY(${Math.max(-100, -scrollY * 0.5)}px)`,
         transition: 'transform 0.3s ease-out'
       }}
     >
