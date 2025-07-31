@@ -5,11 +5,13 @@ import { smoothScrollTo } from '@/utils/mobileOptimization';
 
 const FloatingCTA = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setShowScrollTop(scrollY > 500);
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      setShowScrollTop(currentScrollY > 500);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -29,7 +31,13 @@ const FloatingCTA = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] space-y-4">
+    <div 
+      className="fixed bottom-6 right-6 z-[9999] space-y-4 transition-transform duration-300" 
+      style={{ 
+        transform: `translateY(${Math.max(0, -scrollY * 0.1)}px)`,
+        transition: 'transform 0.3s ease-out'
+      }}
+    >
       
       {/* Bouton WhatsApp */}
       <motion.button
