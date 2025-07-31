@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { CheckCircle, Phone, Shield, Users, CalendarCheck, ArrowRight, Star, Zap, Target, Award, Clock, Sparkles, Building2, Home as HomeIcon, Sparkle, ChevronRight, Play } from "lucide-react";
 
 const accent = "text-cyan-400";
@@ -191,13 +192,17 @@ export default function Home() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="flex flex-col sm:flex-row gap-3"
             >
-              <Button className="group bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-0">
-                Nous contacter
-                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
-              <Button variant="outline" className="border-2 border-gray-300 hover:border-cyan-500 text-gray-700 font-semibold px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-cyan-50/50 bg-white/80 backdrop-blur-sm">
-                Nos services
-              </Button>
+              <Link to="/contact">
+                <Button className="group bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-0">
+                  Nous contacter
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button variant="outline" className="border-2 border-gray-300 hover:border-cyan-500 text-gray-700 font-semibold px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base rounded-xl transition-all duration-300 hover:bg-cyan-50/50 bg-white/80 backdrop-blur-sm">
+                  Nos services
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
           

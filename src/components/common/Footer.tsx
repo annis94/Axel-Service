@@ -16,11 +16,11 @@ const Footer: React.FC = () => {
         <div className="footer-section">
           <h4>Services</h4>
           <ul>
-            <li><Link to="/client/services">Home Cleaning</Link></li>
-            <li><Link to="/client/services">Office Cleaning</Link></li>
-            <li><Link to="/client/services">Deep Cleaning</Link></li>
-            <li><Link to="/client/services">Window Cleaning</Link></li>
-            <li><Link to="/client/services">Special Cleaning</Link></li>
+            <li><Link to="/services">Nettoyage professionnel</Link></li>
+            <li><Link to="/services">3D Sentry Solutions</Link></li>
+            <li><Link to="/services">Désinfection</Link></li>
+            <li><Link to="/services">Désinsectisation</Link></li>
+            <li><Link to="/services">Dératisation</Link></li>
           </ul>
         </div>
         

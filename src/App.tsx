@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import About from './pages/About';
+import Services from './pages/Services';
 import Login from './pages/auth/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
@@ -36,6 +37,14 @@ function App() {
             <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
             <Route path="/faq" element={<MainLayout><FAQ /></MainLayout>} />
             <Route path="/about" element={<MainLayout><About /></MainLayout>} />
+            <Route path="/services" element={<MainLayout><Services /></MainLayout>} />
+            <Route path="/terms" element={<MainLayout><FAQ /></MainLayout>} />
+            <Route path="/privacy" element={<MainLayout><FAQ /></MainLayout>} />
+            <Route path="/gdpr" element={<MainLayout><FAQ /></MainLayout>} />
+            <Route path="/cookies" element={<MainLayout><FAQ /></MainLayout>} />
+            <Route path="/providers" element={<MainLayout><About /></MainLayout>} />
+            <Route path="/careers" element={<MainLayout><About /></MainLayout>} />
+            <Route path="/blog" element={<MainLayout><About /></MainLayout>} />
             
             {/* Auth Routes */}
             <Route path="/login-admin" element={<Login />} />

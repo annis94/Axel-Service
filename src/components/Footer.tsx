@@ -33,9 +33,9 @@ const Footer = () => {
       { name: 'FAQ', href: '/faq' },
     ],
     legal: [
-      { name: 'Mentions légales', href: '/mentions-legales' },
+      { name: 'Mentions légales', href: '/terms' },
       { name: 'Politique de confidentialité', href: '/privacy' },
-      { name: 'CGV', href: '/cgv' },
+      { name: 'CGV', href: '/terms' },
       { name: 'Cookies', href: '/cookies' },
     ]
   };

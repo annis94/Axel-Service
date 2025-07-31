@@ -33,6 +33,7 @@ const Navbar = () => {
 
   const navigation = [
     { name: 'Accueil', href: '/', active: location.pathname === '/' },
+    { name: 'Services', href: '/services', active: location.pathname === '/services' },
     { name: 'Contact', href: '/contact', active: location.pathname === '/contact' },
   ];
 
