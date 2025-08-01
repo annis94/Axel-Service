@@ -174,12 +174,5 @@
     transform: translate3d(0, 0, 0);
   }
   
-  /* Optimisation spécifique pour les boutons flottants */
-  .floating-buttons {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
+
 }

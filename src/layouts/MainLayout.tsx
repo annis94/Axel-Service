@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import FloatingCTA from '@/components/FloatingCTA';
 import ScrollProgress from '@/components/ScrollProgress';
 import { useMobileScroll } from '@/hooks/useMobileScroll';
 
@@ -24,9 +23,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* Footer Sophistiqué */}
       <Footer />
-
-      {/* CTA Flottant */}
-      <FloatingCTA />
     </div>
   );
 };
