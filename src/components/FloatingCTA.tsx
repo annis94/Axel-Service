@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { Phone, MessageCircle, ArrowUp } from 'lucide-react';
 import { smoothScrollTo } from '@/utils/mobileOptimization';
 
 const FloatingCTA = () => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const { scrollY } = useScroll();
+  
+  // État pour contrôler l'affichage du bouton Scroll to Top
+  const [showButton, setShowButton] = useState(false);
+  
   // Effet de parallaxe inversé - les boutons montent quand on scrolle
   const y = useTransform(scrollY, [0, 500], [0, -300]);
   const rotate = useTransform(scrollY, [0, 500], [0, 10]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setShowScrollTop(currentScrollY > 500);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  
+  // Écouter les changements de scrollY pour afficher/masquer le bouton
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setShowButton(latest > 500);
+  });
 
   const scrollToTop = () => {
     smoothScrollTo(0, 500);
@@ -34,7 +32,7 @@ const FloatingCTA = () => {
 
   return (
     <motion.div 
-      className="fixed bottom-6 right-6 z-[9999] space-y-4" 
+      className="fixed bottom-6 right-6 z-[9999] space-y-4 floating-buttons" 
       style={{ y, rotate }}
     >
       
@@ -69,7 +67,7 @@ const FloatingCTA = () => {
 
       {/* Bouton Scroll to Top */}
       <AnimatePresence>
-        {showScrollTop && (
+        {showButton && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

@@ -10,7 +10,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useMobileScroll();
 
   return (
-    <div className="min-h-screen bg-background mobile-scroll-fix">
+    <div className="min-h-screen bg-background">
       {/* Barre de progression de scroll */}
       <ScrollProgress />
 
